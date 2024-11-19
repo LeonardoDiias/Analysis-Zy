@@ -2,7 +2,6 @@ from tkinter import filedialog
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model # type: ignore
-from tensorflow.keras.preprocessing.image import img_to_array
 from PIL import Image, ImageTk
 import tkinter as tk
 
@@ -51,8 +50,8 @@ def select_image():
     #frame = cv2.putText(frame, result_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     # Converter frame para ImageTk
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    image = Image.fromarray(frame_rgb)
+    #frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    image = Image.fromarray(frame)
     photo = ImageTk.PhotoImage(image=image)
     
     # Atualizar o label com a nova imagem
@@ -63,9 +62,17 @@ def select_image():
     result_text = f"Result: {predicted_label}"
     text_label.config(text=result_text)
 
-# Criar um botão para selecionar a imagem
-button = tk.Button(root, text="Select Image", command=select_image)
+# Criar um botão estilizado para selecionar a imagem
+button = tk.Button(root, text="Selecione a Imagem", command=select_image, 
+                   bg='lightblue', fg='black', font=('Sans Serif', 12, 'bold'), 
+                   relief=tk.RAISED, bd=2, padx=10, pady=5)
 button.pack()
+
+
+
+# Criar um botão para selecionar a imagem
+#button = tk.Button(root, text="Select Image", command=select_image)
+#button.pack()
 
 # Iniciar o loop de eventos do Tkinter
 root.mainloop()

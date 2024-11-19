@@ -15,12 +15,16 @@ CONFIDENCE_THRESHOLD = 0.5  # Ajuste conforme necessário
 
 # Configurar a janela Tkinter
 root = tk.Tk()
-root.title("Pneumonia Detection")
-root.geometry("600x400")
+root.title("Zy Analyzer")
+root.geometry("600x420")
 
 # Criar um label para exibir a imagem
 label = tk.Label(root)
 label.pack()
+
+# Adicionar um label para o texto 
+text_label = tk.Label(root, text="") 
+text_label.pack()
 
 def select_image():
     # Abrir uma caixa de diálogo para selecionar o arquivo de imagem
@@ -41,11 +45,10 @@ def select_image():
     predicted_label = 'Pneumonia' if confidence >= CONFIDENCE_THRESHOLD else 'Normal'
 
     # Exibir o resultado na imagem
-    result_text = f"Recognized: {predicted_label} (Confidence: {confidence:.2f})"
-    img_display = Image.open(file_path).convert('RGB')
-    img_display = img_display.resize((400, 350))
+    #result_text = f"Result: {predicted_label}"
+    img_display = Image.open(file_path).convert('RGB').resize((400, 350))
     frame = np.array(img_display)
-    frame = cv2.putText(frame, result_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+    #frame = cv2.putText(frame, result_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     # Converter frame para ImageTk
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -55,6 +58,10 @@ def select_image():
     # Atualizar o label com a nova imagem
     label.config(image=photo)
     label.image = photo
+
+    # Atualizar o texto no label abaixo da imagem 
+    result_text = f"Result: {predicted_label}"
+    text_label.config(text=result_text)
 
 # Criar um botão para selecionar a imagem
 button = tk.Button(root, text="Select Image", command=select_image)

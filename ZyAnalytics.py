@@ -36,10 +36,11 @@ def selection_image():
     image = np.expand_dims(image, axis=0)
     image = image/255.0
     
-    #=#=#=#=#=#=#=#=#  Previsão  da  Classe  #=#=#=#=#=#=#=#=#
+    #=#=#=#=#=#=#=#=#  Predição  da  Classe  #=#=#=#=#=#=#=#=#
 
     previsao = model.predict(image)
     confianca = previsao[0][0]
     previsao_label = 'Pneumonia' if confianca >= COFIDENCE_THRESHOLD else 'Normal'
     
     #=#=#=#=#=#=#=#=# Exibição da Imagem*Resultado #=#=#=#=#=#
+    resultado_txt = f"Result: {previsao_label} (Confiança: {confianca:.2f})"

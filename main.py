@@ -12,7 +12,7 @@ epochs = 20
 dataset_path = 'dataset'
 
 
-data_gen = ImageDataGenerator(rescale=1./255, validation_split=0.2)  # Adicionando split de validação
+data_gen = ImageDataGenerator(rescale=1./255, validation_split=0.2) 
 
 train_gen = data_gen.flow_from_directory(
     dataset_path,
@@ -27,7 +27,7 @@ validation_gen = data_gen.flow_from_directory(
     dataset_path,
     target_size=(img_width, img_height),
     batch_size=batch_size,
-    class_mode='binary',  # Como é uma classificação binária
+    class_mode='binary',  
     subset='validation'
 )
 
@@ -49,13 +49,13 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-# Callbacks (opcional, mas recomendado)
+
 callbacks = [
     EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True),
     ModelCheckpoint('best_model.keras', monitor='val_loss', save_best_only=True)
 ]
 
-# Treinamento do Modelo
+
 model.fit(
     train_gen,
     epochs=epochs,
@@ -63,7 +63,7 @@ model.fit(
     callbacks=callbacks
 )
 
-# Salvando o modelo e os rótulos das classes
+
 model.save('pneumonia_detection_model.h5')
 class_labels = {v: k for k, v in train_gen.class_indices.items()}
 np.save('class_labels.npy', class_labels)

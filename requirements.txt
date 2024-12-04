@@ -4,4 +4,3 @@ tensorflow
 keras
 pillow
 tk
-// https://gamma.app/docs/Analise-de-pneumonia-com-deep-learning-5btr5cvz5ffa56d

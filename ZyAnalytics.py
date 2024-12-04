@@ -17,7 +17,7 @@ COFIDENCE_THRESHOLD = 0.5
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=# Configuração do Tkinter #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 root = tk.Tk()
-root.title("Zy Analyzer")
+root.title("Zy Analytics")
 root.geometry("600x420")
 label = tk.Label(root)
 label.pack()
